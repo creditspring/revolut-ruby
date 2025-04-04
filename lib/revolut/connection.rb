@@ -5,7 +5,6 @@ require 'faraday/mashify'
 require 'json'
 
 require 'revolut/mash'
-require 'revolut/middleware/raise_error'
 
 module Revolut
   # A class responsible for connecting to Revolut API and making requests.
@@ -51,9 +50,6 @@ module Revolut
     def connection
       Faraday.new(connection_options) do |builder|
         builder.request :json
-
-        # builder.response :mashify, mash_class: Revolut::Mash
-        # builder.use Revolut::Middleware::RaiseError
         builder.response :mashify
         builder.response :json
       end

@@ -37,7 +37,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'faraday', "~> 2.0"
   spec.add_dependency 'faraday-mashify'
-  spec.add_dependency 'hashie', '~> 4.0'
+  spec.add_dependency 'hashie', '~> 5.0'
 
   spec.add_development_dependency 'bundler', '~> 2.2'
   spec.add_development_dependency 'pry', '~> 0.13'
