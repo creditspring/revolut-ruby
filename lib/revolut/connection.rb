@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'faraday'
-require 'faraday_middleware'
+require 'faraday/mashify'
 require 'json'
 
 require 'revolut/mash'
@@ -52,11 +52,10 @@ module Revolut
       Faraday.new(connection_options) do |builder|
         builder.request :json
 
-        builder.response :mashify, mash_class: Revolut::Mash
-        builder.use Revolut::Middleware::RaiseError
+        # builder.response :mashify, mash_class: Revolut::Mash
+        # builder.use Revolut::Middleware::RaiseError
+        builder.response :mashify
         builder.response :json
-
-        builder.adapter Faraday.default_adapter
       end
     end
 
