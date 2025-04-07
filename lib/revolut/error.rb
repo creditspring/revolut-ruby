@@ -20,7 +20,7 @@ module Revolut
     #
     # @return [Revolut::Error]
     def self.from_response(response)
-      status = response.status.to_i
+      status = response[:status].to_i
       message = error_message(response)
 
       klass = error_class(status)
@@ -49,9 +49,9 @@ module Revolut
     #
     # @return [String] Revolut error message.
     def self.error_message(response)
-      return unless response.body.is_a?(Hash)
+      return unless response[:body].is_a?(Hash)
 
-      message = response.body['message']
+      message = response[:body][:message]
       return unless message
 
       Revolut::Utils.presence(message)
