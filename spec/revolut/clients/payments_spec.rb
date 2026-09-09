@@ -46,7 +46,7 @@ RSpec.describe Revolut::Clients::Payments do
     end
 
     it 'has correct response' do
-      expect(response).to be_nil
+      expect(response).to be_empty
     end
   end
 
