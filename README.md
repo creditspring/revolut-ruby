@@ -26,7 +26,7 @@ make requests afterward.
 
 
 ```ruby
-client = Revolut::Client.new(api_key: 'my-secret-api-key')
+client = Revolut::Client.new(api_key: 'my-secret-api-key', timeout: 5) # timeout in seconds, default 60
 ```
 
 Example:

@@ -25,9 +25,11 @@ module Revolut
     # @param options [Hash] A customizable set of options.
     # @option options [String] :api_key API Key provider from Revlut.
     # @option options [String] :environment Environment (Production/Sanbox).
+    # @option options [Integer] :timeout Open/read timeout in seconds (default: Net::HTTP 60s).
     def initialize(options = {})
       config.api_key = options[:api_key] if options[:api_key]
       config.environment = options[:environment] if options[:environment]
+      config.timeout = options[:timeout]
     end
 
     # @return [Configuration]
