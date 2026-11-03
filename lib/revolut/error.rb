@@ -16,10 +16,12 @@ module Revolut
     # Returns the appropriate Revolut::Error sublcass based on status and
     # response message.
     #
-    # @param response [Faraday::Env] HTTP response.
+    # @param response [Hash, nil] Faraday error response. nil when no response came back.
     #
-    # @return [Revolut::Error]
+    # @return [Revolut::Error, nil]
     def self.from_response(response)
+      return unless response
+
       status = response[:status].to_i
       message = error_message(response)
 

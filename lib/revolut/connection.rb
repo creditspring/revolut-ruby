@@ -17,23 +17,14 @@ module Revolut
 
     def get(path, options = {})
       request(:get, path, options).body
-    rescue Faraday::Error => e
-      error = Revolut::Error.from_response(e.response)
-      raise error if error
     end
 
     def post(path, options = {})
       request(:post, path, {}, options).body
-    rescue Faraday::Error => e
-      error = Revolut::Error.from_response(e.response)
-      raise error if error
     end
 
     def delete(path, options = {})
       request(:delete, path, options).body
-    rescue Faraday::Error => e
-      error = Revolut::Error.from_response(e.response)
-      raise error if error
     end
 
     private
@@ -45,6 +36,8 @@ module Revolut
 
         request.body = body_params.to_json if Revolut::Utils.present?(body_params)
       end
+    rescue Faraday::Error => e
+      raise Revolut::Error.from_response(e.response) || e
     end
 
     def add_request_headers!(request)
@@ -68,7 +61,8 @@ module Revolut
     def connection_options
       {
         headers: { user_agent: client.config.user_agent },
-        url: client.config.url
+        url: client.config.url,
+        request: { timeout: client.config.timeout }
       }
     end
   end

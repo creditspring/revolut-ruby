@@ -9,7 +9,7 @@ module Revolut
     DEFAULT_ENVIRONMENT = :production
     USER_AGENT = "Revolut Ruby v#{Revolut::VERSION}"
 
-    attr_accessor :api_key
+    attr_accessor :api_key, :timeout
     attr_writer :url, :user_agent
 
     # Takes url provided from configuration or uses default one.
